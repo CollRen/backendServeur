@@ -32,24 +32,24 @@ server.use(express.static(path.join(__dirname, "public")));
 
 /**  --- __DÉBUT DES ROUTES__ --- */
 
-const recettesRoutes = require("./routes/recettes");
-server.use("/api/recettes", recettesRoutes);
+const filmsRoutes = require("./routes/films");
+server.use("/api/films", filmsRoutes);
 
 const usersRoutes = require("./routes/users");
 server.use("/api/users", usersRoutes);
-/* 
-const auteurRoutes = require("./routes/auteur");
-server.use("/api/auteur", auteurRoutes); */
+
+const utilisateursRoutes = require("./routes/utilisateurs");
+server.use("/api/utilisateurs", utilisateursRoutes);
 
 
 
-// Initialisation des auteur
-server.post("/api/auteur/initialiser", (req, res) => {
+// Initialisation des utilisateurs
+server.post("/api/utilisateurs/initialiser", (req, res) => {
   try {
-    const dataInit = require("./data/donneesAuteurTest");
+    const dataInit = require("./data/donneesUtilisateursTest");
 
     dataInit.forEach(async (user) => {
-      await db.collection("auteur").add(user);
+      await db.collection("utilisateurs").add(user);
     });
     res.statusCode = 200;
     return res.json({ message: "Liste d'utilisateur est initialisée" });
@@ -61,21 +61,21 @@ server.post("/api/auteur/initialiser", (req, res) => {
 
 
 
-// Section Routes Auteur
-server.post("/api/auteur/inscription", (req, res) => {
+// Section Routes Utilisateurs
+server.post("/api/utilisateurs/inscription", (req, res) => {
   res.json("post utilisateur/inscription ok");
 });
 
-/* server.post("/api/auteur/connexion", (req, res) => {
-  res.json("post auteur/connexion ok");
+/* server.post("/api/utilisateurs/connexion", (req, res) => {
+  res.json("post utilisateurs/connexion ok");
 });
  */
-server.delete("/api/auteur/:id", (req, res) => {
-  res.json("delete auteur/:id ok");
+server.delete("/api/utilisateurs/:id", (req, res) => {
+  res.json("delete utilisateurs/:id ok");
 });
 
-server.put("/api/auteur/:id", (req, res) => {
-  res.json("edit auteur/:id ok");
+server.put("/api/utilisateurs/:id", (req, res) => {
+  res.json("edit utilisateurs/:id ok");
 });
 
 // Middleware -> Message d'erreur en cas... d'erreur

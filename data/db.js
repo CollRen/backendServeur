@@ -1,15 +1,13 @@
+const admin = require("firebase-admin");
+const {getFirestore} = require("firebase-admin/firestore");
 
-var mysql = require('mysql');
-var db = mysql.createConnection({
-  host: process.env.DBHOST,
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWORD,
-  database: process.env.DBDATABASE
+const serviceAccount = require("../db-config.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
 });
 
-db.connect();
-
-
+const db = getFirestore();
 
 module.exports = db;
 
